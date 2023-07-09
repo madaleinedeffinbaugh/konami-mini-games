@@ -3,12 +3,12 @@
 (function () {
 
     // initial set up of the lives
-    var lives = 3;
+    let lives = 3;
     $('#lives').replaceWith("<p id='lives'>Lives: " + lives + "</p>");
 
     // konami code cheat
     //  ↑ ↑ ↓ ↓ ← → ← → B A
-    var startingString = "";
+    let startingString = "";
     $(document).keyup(function (event) {
         startingString += event.keyCode;
         if (startingString === "3838404037393739666513") {
@@ -43,17 +43,17 @@
 
     // MATCHING PAIRS CODE
     // variables
-    var flipped = 0;
-    var choices = [];
-    var solved = [];
+    let flipped = 0;
+    let choices = [];
+    let solved = [];
 
     //creating the cards
-    var cardOne = generateCard("otter", "fa-sharp fa-solid fa-otter", "Otter")
-    var cardTwo = generateCard("cat", "fa-solid fa-cat", "Cat")
-    var cardThree = generateCard("dragon", "fa-solid fa-dragon", "Dragon")
-    var cardFour = generateCard("dove", "fa-solid fa-dove", "Dove")
-    var cardFive = generateCard("fish", "fa-solid fa-fish", "Fish");
-    var cardSix = generateCard("worm", "fa-solid fa-worm", "Worm");
+    let cardOne = generateCard("otter", "fa-sharp fa-solid fa-otter", "Otter")
+    let cardTwo = generateCard("cat", "fa-solid fa-cat", "Cat")
+    let cardThree = generateCard("dragon", "fa-solid fa-dragon", "Dragon")
+    let cardFour = generateCard("dove", "fa-solid fa-dove", "Dove")
+    let cardFive = generateCard("fish", "fa-solid fa-fish", "Fish");
+    let cardSix = generateCard("worm", "fa-solid fa-worm", "Worm");
 
     //function that is called to create the cards
     function generateCard(divName, iconString, header) {
@@ -80,7 +80,7 @@
             flipped = 0;
             choices = [];
             solved = [];
-            var timeout = setTimeout(function () {
+            let timeout = setTimeout(function () {
                 setEventListeners();
             }, 4000)
         } else {
@@ -93,18 +93,18 @@
 
     function showCards() {
         $('.card-container > .card').addClass('flip');
-        var timeout = setTimeout(function () {
+        let timeout = setTimeout(function () {
             $('.card-container > .card').removeClass('flip');
         }, 3000)
     }
 
     function randomizeOrder() {
-        var cards = [cardOne, cardOne, cardTwo, cardTwo, cardThree, cardThree, cardFour, cardFour, cardFive, cardFive, cardSix, cardSix];
-        var index = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-        var picked = [];
+        let cards = [cardOne, cardOne, cardTwo, cardTwo, cardThree, cardThree, cardFour, cardFour, cardFive, cardFive, cardSix, cardSix];
+        let index = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+        let picked = [];
         while (picked.length < 12) {
-            var randomIndex = Math.floor(Math.random() * index.length);
-            var item = index[randomIndex];
+            let randomIndex = Math.floor(Math.random() * index.length);
+            let item = index[randomIndex];
             if (picked.includes(item)) {
             } else {
                 picked.push(item);
@@ -116,11 +116,11 @@
     }
 
     function dynamicEventListeners(start, end) {
-        for (var i = start; i < end; i++) {
-            var selector = ".card-container:eq(" + i + ")";
+        for (let i = start; i < end; i++) {
+            let selector = ".card-container:eq(" + i + ")";
             $(selector).click(function () {
-                var i = 0;
-                var child = this;
+                let i = 0;
+                let child = this;
                 while ((child = child.previousSibling) != null) {
                     i++
                 }
@@ -141,9 +141,9 @@
     }
 
     function mainGamePlay(itemNo) {
-        var cardSelector = ".card-container:eq(" + itemNo + ") > .card";
-        var selector = ".card-container:eq(" + itemNo + ")"
-        var cardName = $(selector).attr("name");
+        let cardSelector = ".card-container:eq(" + itemNo + ") > .card";
+        let selector = ".card-container:eq(" + itemNo + ")"
+        let cardName = $(selector).attr("name");
         flip(cardSelector, selector);
         choose(cardName);
     }
@@ -159,7 +159,7 @@
 
     function hideSolved() {
         solved.forEach(function (card) {
-            var selector = 'div[name="' + card + '"]';
+            let selector = 'div[name="' + card + '"]';
             $(selector).addClass('hide');
             $(selector).off('click');
         })
@@ -181,11 +181,11 @@
         solved.push(choicesArray[1]);
         if (solved.length == 12) {
             hideSolved();
-            var timeout = setTimeout(function () {
+            let timeout = setTimeout(function () {
                 alert('YOU WIN!')
                 lives += 3;
                 $('#lives').replaceWith("<p id='lives'>Lives: " + lives + "</p>");
-                var answer = confirm("Would you like to play again?");
+                let answer = confirm("Would you like to play again?");
                 playAgain(answer);
             }, 1000)
         }
@@ -194,9 +194,9 @@
     }
 
     function loser(choices) {
-        var cardSelectorOne = 'div[name="' + choices[0] + '"] > .card'
-        var cardSelectorTwo = 'div[name="' + choices[1] + '"] > .card'
-        var timeout = setTimeout(function () {
+        let cardSelectorOne = 'div[name="' + choices[0] + '"] > .card'
+        let cardSelectorTwo = 'div[name="' + choices[1] + '"] > .card'
+        let timeout = setTimeout(function () {
             $(cardSelectorOne).removeClass('flip');
             $(cardSelectorOne).off('click');
             $(cardSelectorTwo).removeClass('flip');
@@ -204,7 +204,7 @@
             lives -= 1;
             $('#lives').replaceWith("<p id='lives'>Lives: " + lives + "</p>");
             if (lives <= 0) {
-                var timeout = setTimeout(function () {
+                let timeout = setTimeout(function () {
                     alert('You are out of lives!');
                     homeScreen();
                 }, 1000);
@@ -227,7 +227,7 @@
     function reset() {
         flipped = 0;
         choices = [];
-        var timeout = setTimeout(function () {
+        let timeout = setTimeout(function () {
             setEventListeners();
             hideSolved();
         }, 1000)
@@ -242,7 +242,7 @@
 
     //MINESWEEPER CODE
     //enabling flag controls
-    var flagged = false;
+    let flagged = false;
     $('#flag').click(function () {
         if (flagged == false) {
             flagged = true;
@@ -254,14 +254,14 @@
     })
 
     //variables designed to exclude certain blocks (end blocks) for checking if there's mines around
-    var specialNexts = [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225];
-    var specialPrevs = [1, 16, 31, 46, 61, 76, 91, 106, 121, 136, 151, 166, 181, 196, 211];
-    var specialBelow = [211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225]
-    var specialBelowLeft = [1, 16, 31, 46, 61, 76, 91, 106, 121, 136, 151, 166, 181, 196, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225];
-    var specialBelowRight = [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225];
-    var specialAbove = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-    var specialAboveLeft = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 31, 46, 61, 76, 91, 106, 121, 136, 151, 166, 181, 196, 211];
-    var specialAboveRight = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225];
+    let specialNexts = [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225];
+    let specialPrevs = [1, 16, 31, 46, 61, 76, 91, 106, 121, 136, 151, 166, 181, 196, 211];
+    let specialBelow = [211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225]
+    let specialBelowLeft = [1, 16, 31, 46, 61, 76, 91, 106, 121, 136, 151, 166, 181, 196, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225];
+    let specialBelowRight = [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225];
+    let specialAbove = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+    let specialAboveLeft = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 31, 46, 61, 76, 91, 106, 121, 136, 151, 166, 181, 196, 211];
+    let specialAboveRight = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225];
 
     //functions
     function startMineSweeper() {
@@ -273,7 +273,7 @@
             $('.wrapper').replaceWith('<div class="wrapper"></div>');
 
             <!--  225 squares total-->
-            for (var i = 0; i < 185; i++) {
+            for (let i = 0; i < 185; i++) {
                 $(".wrapper").append("<div></div>");
             }
 
@@ -287,9 +287,9 @@
                     } else {
                         $(this).addClass('flagged');
                     }
-                    var countFlags = 0;
-                    for (var i = 1; i < 226; i++) {
-                        var selector = ".wrapper div:nth-child(" + i + ")";
+                    let countFlags = 0;
+                    for (let i = 1; i < 226; i++) {
+                        let selector = ".wrapper div:nth-child(" + i + ")";
                         if ($(selector).hasClass('flagged')) {
                             countFlags += 1;
                         }
@@ -301,7 +301,7 @@
                     } else if ($(this).text() != "") {
                         reveal(this);
                     } else {
-                        var currentPosition = getChildNumber(this);
+                        let currentPosition = getChildNumber(this);
                         clearArea(currentPosition);
                     }
                 }
@@ -316,22 +316,22 @@
     }
 
     function randomMinePlacement() {
-        var mines = []
+        let mines = []
         while (mines.length < 40) {
             //gives random number 1-215
-            var randomIndex = (Math.floor(Math.random() * 185) + 1);
+            let randomIndex = (Math.floor(Math.random() * 185) + 1);
             if (!mines.includes(randomIndex)) {
                 mines.push(randomIndex);
-                var selector = ".wrapper div:nth-child(" + randomIndex + ")";
+                let selector = ".wrapper div:nth-child(" + randomIndex + ")";
                 $(selector).after("<div class='mine'></div>");
             }
         }
     }
 
     function clues() {
-        for (var i = 1; i < 226; i++) {
-            var counter = 0;
-            var selector = ".wrapper div:nth-child(" + i + ")";
+        for (let i = 1; i < 226; i++) {
+            let counter = 0;
+            let selector = ".wrapper div:nth-child(" + i + ")";
             if (!$(selector).hasClass('mine')) {
                 //mine left
                 if (($(selector).prev().hasClass('mine')) && !specialPrevs.includes(i)) {
@@ -388,9 +388,9 @@
     }
 
     function winMineSweeper() {
-        var counter = 0;
-        for (var i = 1; i < 226; i++) {
-            var selector = ".wrapper div:nth-child(" + i + ")";
+        let counter = 0;
+        for (let i = 1; i < 226; i++) {
+            let selector = ".wrapper div:nth-child(" + i + ")";
             if ($(selector).hasClass('show') || $(selector).hasClass('mine')) {
                 counter += 1;
             }
@@ -399,7 +399,7 @@
             alert("YOU WIN!!");
             lives += 3;
             $('#lives').replaceWith("<p id='lives'>Lives: " + lives + "</p>");
-            var answer = confirm("Would you like to play again?");
+            let answer = confirm("Would you like to play again?");
             if (answer) {
                 startMineSweeper();
             } else {
@@ -411,11 +411,11 @@
     function hitAMine(mine) {
         $(mine).addClass('mine-show');
         $(mine).removeClass("flagged");
-        var timeout = setTimeout(function () {
+        let timeout = setTimeout(function () {
             alert("Uh oh! You hit a mine! You lose!");
             lives -= 1;
             $('#lives').replaceWith("<p id='lives'>Lives: " + lives + "</p>");
-            var answer = confirm("Would you like to play again?");
+            let answer = confirm("Would you like to play again?");
             if (answer) {
                 $('#flagNumber').html('<p id="flagNumber">Current Number of Flags Placed: 0</p>')
                 startMineSweeper();
@@ -427,8 +427,8 @@
     }
 
     function getChildNumber(selector) {
-        var count = 0;
-        var selectorCount = selector;
+        let count = 0;
+        let selectorCount = selector;
         while (typeof $(selectorCount).prev().prop('nodeName') != 'undefined') {
             count += 1;
 
@@ -438,15 +438,15 @@
     }
 
     function clearArea(iteration) {
-        var selector = ".wrapper div:nth-child(" + iteration + ")";
-        var nextLeft = ".wrapper div:nth-child(" + (iteration - 1) + ")";
-        var nextRight = ".wrapper div:nth-child(" + (iteration + 1) + ")";
-        var nextAbove = ".wrapper div:nth-child(" + (iteration - 15) + ")";
-        var nextBelow = ".wrapper div:nth-child(" + (iteration + 15) + ")";
-        var nextAboveRight = ".wrapper div:nth-child(" + (iteration - 14) + ")";
-        var nextBelowRight = ".wrapper div:nth-child(" + (iteration + 16) + ")";
-        var nextAboveLeft = ".wrapper div:nth-child(" + (iteration - 16) + ")";
-        var nextBelowLeft = ".wrapper div:nth-child(" + (iteration + 14) + ")";
+        let selector = ".wrapper div:nth-child(" + iteration + ")";
+        let nextLeft = ".wrapper div:nth-child(" + (iteration - 1) + ")";
+        let nextRight = ".wrapper div:nth-child(" + (iteration + 1) + ")";
+        let nextAbove = ".wrapper div:nth-child(" + (iteration - 15) + ")";
+        let nextBelow = ".wrapper div:nth-child(" + (iteration + 15) + ")";
+        let nextAboveRight = ".wrapper div:nth-child(" + (iteration - 14) + ")";
+        let nextBelowRight = ".wrapper div:nth-child(" + (iteration + 16) + ")";
+        let nextAboveLeft = ".wrapper div:nth-child(" + (iteration - 16) + ")";
+        let nextBelowLeft = ".wrapper div:nth-child(" + (iteration + 14) + ")";
         $(selector).addClass('show');
         $(selector).removeClass("flagged");
 
@@ -461,7 +461,6 @@
     }
 
     function clearDirection(iteration, exclusiveArray, nextSelector, increment) {
-        // var nextSelector = ".wrapper div:nth-child(" + (iteration + 1) + ")";
         if ($(nextSelector).text() != "" && !exclusiveArray.includes(iteration)) {
             $(nextSelector).addClass('show');
             $(nextSelector).removeClass("flagged");

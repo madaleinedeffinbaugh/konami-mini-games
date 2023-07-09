@@ -21,7 +21,7 @@ button {
     font-weight: bolder;
 }
 
-/*home page stylinh*/
+/*home page styling*/
 #home {
     display: block;
 }
@@ -49,8 +49,6 @@ button {
     padding-right: 2em;
     padding-left: 2em;
 }
-
-
 
 /*matching game styles*/
 .wrapperOne {
@@ -118,7 +116,6 @@ h4 {
     opacity: .15;
 }
 
-
 /*minesweeper styling*/
 .wrapper, .wrapper div {
     margin: 0;
@@ -139,10 +136,11 @@ h4 {
     width: 20px;
     color: transparent;
 }
-/*used for testing correct functionality of the clears*/
-/*.mine {*/
-/*    background-color: red !important;*/
-/*}*/
+/*used for testing correct functionality of clearing surrounding spaces
+.mine {
+  background-color: red !important;
+}
+*/
 .mine-show {
     background-color: red;
     background-image: url("../img/bomb.png");
