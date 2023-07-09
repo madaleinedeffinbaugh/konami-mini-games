@@ -7,32 +7,35 @@
     $('#lives').replaceWith("<p id='lives'>Lives: " + lives + "</p>");
 
     // konami code cheat
-    //up up down down left right left right B A
-    var testString = "";
+    //  ↑ ↑ ↓ ↓ ← → ← → B A
+    var startingString = "";
     $(document).keyup(function (event) {
-        testString += event.keyCode;
-        if (testString == "3838404037393739666513") {
+        startingString += event.keyCode;
+        if (startingString === "3838404037393739666513") {
             alert("You have added 30 lives!");
             lives += 30;
             $('#lives').replaceWith("<p id='lives'>Lives: " + lives + "</p>");
         }
-        ;
+
     });
 
-    // main control buttons event listeners
+    //start the matching game
     $('.play-matching').click(function () {
         start();
-
     });
+    //rules for the matching game
     $('.rules-matching').click(function () {
         alert("You will be shown the cards for three seconds. Try to memorize their location as best as possible. Once they flip over, try to match the pairs by clicking on each card. Each wrong match will cost you a life. Match all the pairs and you win the game! If you win the game, you will be awarded 3 extra lives.");
     })
+    //return to the home screen
     $('.returnHome').click(function () {
         homeScreen();
     })
+    // start the minesweeper game
     $('.play-minesweeper').click(function () {
         startMineSweeper();
     })
+    //rules for the minesweeper game
     $('.rules-minesweeper').click(function () {
         alert("The goal of the game is to uncover every square that does not contain a mine. If you click on an empty square, all surrounding squares that do not contain a mine will be shown. The numbers revealed on the squares indicated that there are that amount of mines nearby. The mine(s) nearby can either be directly left, right, up, down, or diagonal from the square. To mark a square that you suspect to be a mine, hit the 'flag' button and then click the square. Hit the flag button again to resume playing. Once all squares that do not contain a mine have been revealed, you win the game! Winning grants you 3 extra lives. If you click a square containing a mine, you lose! Good luck!")
     })
@@ -44,79 +47,27 @@
     var choices = [];
     var solved = [];
 
-    var cardOne = '<div class="card-container" name="otter">\n' +
-        '      <div class="card">\n' +
-        '        <div class="front">\n' +
-        '          <h1>?</h1>\n' +
-        '        </div>\n' +
-        '        <div class="back">\n' +
-        '          <i class="fa-sharp fa-solid fa-otter"></i>\n' +
-        '          <h4>Otter</h4>\n' +
-        '        </div>\n' +
-        '      </div>\n' +
-        '    </div>'
+    //creating the cards
+    var cardOne = generateCard("otter", "fa-sharp fa-solid fa-otter", "Otter")
+    var cardTwo = generateCard("cat", "fa-solid fa-cat", "Cat")
+    var cardThree = generateCard("dragon", "fa-solid fa-dragon", "Dragon")
+    var cardFour = generateCard("dove", "fa-solid fa-dove", "Dove")
+    var cardFive = generateCard("fish", "fa-solid fa-fish", "Fish");
+    var cardSix = generateCard("worm", "fa-solid fa-worm", "Worm");
 
-    var cardTwo = '<div class="card-container" name="cat">\n' +
-        '      <div class="card">\n' +
-        '        <div class="front">\n' +
-        '          <h1>?</h1>\n' +
-        '        </div>\n' +
-        '        <div class="back">\n' +
-        '         <i class="fa-solid fa-cat"></i>\n' +
-        '          <h4>Cat</h4>\n' +
-        '        </div>\n' +
-        '      </div>\n' +
-        '    </div>'
-
-    var cardThree = '<div class="card-container" name="dragon">\n' +
-        '      <div class="card">\n' +
-        '        <div class="front">\n' +
-        '          <h1>?</h1>\n' +
-        '        </div>\n' +
-        '        <div class="back">\n' +
-        '          <i class="fa-solid fa-dragon"></i>\n' +
-        '          <h4>Dragon</h4>\n' +
-        '        </div>\n' +
-        '      </div>\n' +
-        '    </div>'
-
-    var cardFour = '<div class="card-container" name="dove">\n' +
-        '      <div class="card">\n' +
-        '        <div class="front">\n' +
-        '          <h1>?</h1>\n' +
-        '        </div>\n' +
-        '        <div class="back">\n' +
-        '          <i class="fa-solid fa-dove"></i>\n' +
-        '          <h4>Dove</h4>\n' +
-        '        </div>\n' +
-        '      </div>\n' +
-        '    </div>'
-
-    var cardFive = '<div class="card-container" name="fish">\n' +
-        '      <div class="card">\n' +
-        '        <div class="front">\n' +
-        '          <h1>?</h1>\n' +
-        '        </div>\n' +
-        '        <div class="back">\n' +
-        '          <i class="fa-solid fa-fish"></i>\n' +
-        '          <h4>Fish</h4>\n' +
-        '        </div>\n' +
-        '      </div>\n' +
-        '    </div>'
-
-
-    var cardSix = '<div class="card-container" name="worm">\n' +
-        '      <div class="card">\n' +
-        '        <div class="front">\n' +
-        '          <h1>?</h1>\n' +
-        '        </div>\n' +
-        '        <div class="back">\n' +
-        '          <i class="fa-solid fa-worm"></i>\n' +
-        '          <h4>Worm</h4>\n' +
-        '        </div>\n' +
-        '      </div>\n' +
-        '    </div>'
-
+    //function that is called to create the cards
+    function generateCard(divName, iconString, header) {
+        return `<div class="card-container" name="${divName}">` +
+            `<div class="card"><div class="front">` +
+            `<h1>?</h1>` +
+            `</div>` +
+            `<div class="back">` +
+            `<i class="${iconString}"></i>` +
+            `<h4>${header}</h4>` +
+            `</div>` +
+            `</div>` +
+            `</div>`;
+    }
 
     //functions
     function start() {
@@ -201,7 +152,7 @@
         $(cardSelector).addClass('flip');
         $(selector).off('click');
         flipped += 1;
-        if (flipped == 2) {
+        if (flipped === 2) {
             $('.card-container').off('click');
         }
     }
@@ -276,7 +227,7 @@
     function reset() {
         flipped = 0;
         choices = [];
-        var timeout = setTimeout(function() {
+        var timeout = setTimeout(function () {
             setEventListeners();
             hideSolved();
         }, 1000)
@@ -337,9 +288,9 @@
                         $(this).addClass('flagged');
                     }
                     var countFlags = 0;
-                    for(var i = 1; i < 226; i++) {
+                    for (var i = 1; i < 226; i++) {
                         var selector = ".wrapper div:nth-child(" + i + ")";
-                        if($(selector).hasClass('flagged')) {
+                        if ($(selector).hasClass('flagged')) {
                             countFlags += 1;
                         }
                     }
@@ -499,17 +450,17 @@
         $(selector).addClass('show');
         $(selector).removeClass("flagged");
 
-        clearDirection(iteration, specialPrevs, nextLeft,-1);
-        clearDirection(iteration, specialNexts, nextRight,1);
-        clearDirection(iteration, specialAbove, nextAbove,-15);
+        clearDirection(iteration, specialPrevs, nextLeft, -1);
+        clearDirection(iteration, specialNexts, nextRight, 1);
+        clearDirection(iteration, specialAbove, nextAbove, -15);
         clearDirection(iteration, specialBelow, nextBelow, +15);
         clearDirection(iteration, specialAboveRight, nextAboveRight, -14);
         clearDirection(iteration, specialBelowRight, nextBelowRight, 16);
         clearDirection(iteration, specialAboveLeft, nextAboveLeft, -16);
-        clearDirection(iteration, specialBelowLeft,nextBelowLeft, 14)
+        clearDirection(iteration, specialBelowLeft, nextBelowLeft, 14)
     }
 
-    function clearDirection(iteration, exclusiveArray,nextSelector,increment) {
+    function clearDirection(iteration, exclusiveArray, nextSelector, increment) {
         // var nextSelector = ".wrapper div:nth-child(" + (iteration + 1) + ")";
         if ($(nextSelector).text() != "" && !exclusiveArray.includes(iteration)) {
             $(nextSelector).addClass('show');
@@ -518,7 +469,5 @@
             clearArea(iteration + increment);
         }
     }
-
-
 
 }());
