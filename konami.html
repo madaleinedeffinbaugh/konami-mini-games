@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Konami Code</title>
+  <script src="https://kit.fontawesome.com/376cc6886e.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/konami.css">
+</head>
+<body>
+<header>
+  <h1>Konami Code</h1>
+  <p id="lives"></p>
+</header>
+
+<!--Area to display home screen and games-->
+<div id="home">
+  <div id="games">
+    <div>
+      <h2>Matching Game</h2>
+      <button class="play-matching">Play Game!</button>
+      <button class="rules-matching">Rules</button>
+      <img src="img/matching-game.png" alt="Matching Game">
+    </div>
+    <div>
+      <h2>Minesweeper</h2>
+      <button class="rules-minesweeper">Rules</button>
+      <button class="play-minesweeper">Play Game!</button>
+      <img src="img/minesweeper.png" alt="MineSweeper Game">
+    </div>
+  </div>
+</div>
+
+
+<!--matching game screen, only shows when clicked on-->
+<div id="matching-game">
+  <div class="button-group">
+    <button class="rules-matching">Rules</button>
+    <button class="returnHome">Return to Main Screen</button>
+  </div>
+  <div class="container">
+    <div class="wrapperOne"></div>
+    <div class="wrapperTwo"></div>
+    <div class="wrapperThree"></div>
+  </div>
+</div>
+
+<!--minesweeper game screen, only shows when clicked on-->
+<div id="minesweeper-game">
+  <div class="button-group">
+    <button class="rules-minesweeper">Rules</button>
+    <button class="returnHome">Return to Main Screen</button>
+  </div>
+  <div>
+    <p>Mines Total: 40</p>
+    <p id="flagNumber">Current Number of Flags Placed: 0</p>
+    <button id="flag">Flag</button>
+  </div>
+  <div class="wrapper"></div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="js/konami.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+/*general styling*/
+body {
+    background-color: #c7c3c3;
+    color:black;
+}
+header {
+    text-align: center;
+}
+#lives {
+    font-weight: bolder;
+}
+.button-group {
+    margin: 1.5em;
+}
+button {
+    background-color: #a86c6c;
+    padding: .5em;
+    border-radius: 25px;
+    min-width: 100px;
+    color: #270722;
+    font-weight: bolder;
+}
+
+/*home page stylinh*/
+#home {
+    display: block;
+}
+#home img {
+    max-height: 345px;
+    margin-top: 1em;
+}
+#matching-game {
+    display: none;
+}
+#minesweeper-game {
+    display: none;
+}
+#home, #matching-game, #minesweeper-game {
+    text-align: center;
+}
+#games {
+    display: flex;
+    justify-content: center;
+}
+#games div {
+    max-width: 360px;
+    text-align: center;
+    margin: 0;
+    padding-right: 2em;
+    padding-left: 2em;
+}
+
+
+
+/*matching game styles*/
+.wrapperOne {
+    display: flex;
+    justify-content: center;
+}
+.wrapperTwo {
+    display: flex;
+    justify-content: center;
+}
+.wrapperThree {
+    display: flex;
+    justify-content: center;
+}
+.container {
+    min-width: 645px;
+}
+i {
+    font-size: 5em;
+}
+h4 {
+    margin: .3em;
+    font-size: 1.5em;
+}
+.front h1 {
+    font-size: 8em;
+}
+.card-container {
+    perspective: 800px;
+    text-align: center;
+    margin: .5em;
+    height: 180px;
+    width: 134px;
+}
+.front {
+    background-color: #751e29;
+}
+.card {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    transition: transform 1000ms;
+    transform-style: preserve-3d;
+}
+.front, .back {
+    border-radius: 25px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.back {
+    background-color: #a86c6c;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+}
+.flip {
+    cursor: pointer;
+    transform: rotateY(180deg);
+}
+.hide {
+    opacity: .15;
+}
+
+
+/*minesweeper styling*/
+.wrapper, .wrapper div {
+    margin: 0;
+    padding: 0;
+}
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 330px;
+    border: 2px solid #751e29;
+    margin: auto;
+    background-color: darkgray;
+
+}
+.wrapper div {
+    border: 1px solid black;
+    height: 20px;
+    width: 20px;
+    color: transparent;
+}
+/*used for testing correct functionality of the clears*/
+/*.mine {*/
+/*    background-color: red !important;*/
+/*}*/
+.mine-show {
+    background-color: red;
+    background-image: url("../img/bomb.png");
+}
+.show {
+    background-color: lightgrey;
+    color: black !important;
+}
+.flagged {
+    background-color: darkred;
+    background-image: url("../img/flag.png");
+}
+.flagged-button {
+    background-color: #751e29;
+}
+#flag {
+    margin-bottom: 1em;
+}
+
+
+
+
